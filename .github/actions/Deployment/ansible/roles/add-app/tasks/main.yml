@@ -10,8 +10,10 @@
         finalizers:
           - resources-finalizer.argocd.argoproj.io
         annotations:
-          argocd-image-updater.argoproj.io/image-list: app=wgall/{{ project }}:~{{ process }}
+          argocd-image-updater.argoproj.io/image-list: app=wgall/{{ project }}
+          argocd-image-updater.argoproj.io/app.update-strategy: latest
           argocd-image-updater.argoproj.io/write-back-method: git:secret:argocd/git-creds
+          argocd-image-updater.argoproj.io/app.allow-tags: regexp:^{{ process }}-*$
           argocd-image-updater.argoproj.io/git-branch: ARGOCD
           argocd-image-updater.argoproj.io/app.force-update: "true"
           argocd.argoproj.io/sync-options: Prune=true
