@@ -21,7 +21,7 @@
         source:
           repoURL: https://{{ gituser }}:{{ gittoken }}@github.com/{{ owner }}/{{ project }}
           targetRevision: ARGOCD
-          path: yamls
+          path: "{{ process }}"
         destination:
           server: https://kubernetes.default.svc
           namespace: "{{ project }}"

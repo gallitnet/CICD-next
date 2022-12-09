@@ -24,6 +24,7 @@ cd $PROJECT
 git checkout ARGOCD
 
 /files/deployment_files.sh $PROJECT
+cp /files/$PROJECT/stage/deployment.yaml /files/$PROJECT/prod/deployment.yaml
 git add .
 git commit -am "Add deployment files"
 git push https://$GITUSER:$GITTOKEN@github.com/$OWNER/$PROJECT.git ARGOCD

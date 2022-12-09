@@ -1,6 +1,6 @@
 #!/bin/bash
 IMAGE=$1
-cat <<EOF > /files/$1/yamls/deployment.yaml
+cat <<EOF > /files/$1/stage/deployment.yaml
 apiVersion: v1
 kind: Service
 metadata:
