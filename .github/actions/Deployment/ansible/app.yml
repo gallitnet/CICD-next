@@ -1,0 +1,14 @@
+---
+- name: Add app
+  hosts: localhost 
+  collections:
+    - kubernetes.core
+  gather_facts: false 
+  environment: 
+    GOOGLE_CREDENTIALNS: "{{ credential }}"
+  roles: 
+    - create-namespace
+    - add-app
+    - generate-cert
+    - create-ingress
+    - create-hpa

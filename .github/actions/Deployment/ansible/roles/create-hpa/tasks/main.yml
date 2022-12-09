@@ -1,0 +1,28 @@
+- name: Create HPA
+  kubernetes.core.k8s:
+    state: present
+    definition:
+      apiVersion: autoscaling/v2
+      kind: HorizontalPodAutoscaler
+      metadata:
+        creationTimestamp: null
+        name: "{{ project }}"
+        namespace: "{{ project }}"
+      spec:
+        maxReplicas: 3
+        metrics:
+        - pods:
+            metric:
+              name: container_network_receive_bytes_per_second
+            target:
+              averageValue: "1000m"
+              type: AverageValue
+          type: Pods
+        minReplicas: 1
+        scaleTargetRef:
+          apiVersion: apps/v1
+          kind: Deployment
+          name: nextapp
+      status:
+        currentMetrics: null
+        desiredReplicas: 0

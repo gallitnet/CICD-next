@@ -1,0 +1,34 @@
+- name: Add Application to ArgoCD
+  kubernetes.core.k8s:
+    state: present
+    definition:
+      apiVersion: argoproj.io/v1alpha1
+      kind: Application
+      metadata:
+        name: "{{ project }}"
+        namespace: argocd
+        finalizers:
+          - resources-finalizer.argocd.argoproj.io
+        annotations:
+          argocd-image-updater.argoproj.io/image-list: app=wgall/{{ project }}:~{{ process }}
+          argocd-image-updater.argoproj.io/write-back-method: git:secret:argocd/git-creds
+          argocd-image-updater.argoproj.io/git-branch: ARGOCD
+          argocd-image-updater.argoproj.io/app.force-update: "true"
+          argocd.argoproj.io/sync-options: Prune=true
+      spec:
+        project: default
+        source:
+          repoURL: https://{{ gituser }}:{{ gittoken }}@github.com/{{ owner }}/{{ project }}
+          targetRevision: ARGOCD
+          path: yamls
+        destination:
+          server: https://kubernetes.default.svc
+          namespace: "{{ project }}"
+        syncPolicy:
+          syncOptions:
+          - CreateNamespace=true
+          automated:
+            selfHeal: true
+            prune: true
+            allowEmpty: true
+

@@ -1,0 +1,2 @@
+[stage]
+34.118.42.122 ansible_ssh_user=ansible ansible_ssh_private_key_file=/files/ansible/inventory/keys/key

@@ -1,0 +1,11 @@
+- hosts: "stage"
+  gather_facts: true 
+  collections:
+    - kubernetes.core
+  roles: 
+    - create-namespace
+    - add-app
+    - generate-cert
+    - create-ingress
+    - create-hpa
+    

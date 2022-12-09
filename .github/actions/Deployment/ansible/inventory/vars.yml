@@ -1,0 +1,4 @@
+all:
+  vars:
+    gcloud_sa_path: "/files/creds/.cred.json" 
+    credential: "{{gcloud_sa_path}}"

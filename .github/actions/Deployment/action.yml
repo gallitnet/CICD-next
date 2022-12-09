@@ -1,0 +1,35 @@
+name: "Add app to ArgoCD"
+description: "Running a deployment process"
+inputs:
+  clustername:
+    description: "Cluster name"
+    required: true
+  token:
+    description: "github-token"
+    required: true
+  username:
+    description: "Git username"
+    required: true
+  projectid:
+    description: "Project ID"
+    required: true
+  project:
+    description: "project name"
+    required: true
+  saccount:
+    description: "Secret to service account"
+    required: true
+  owner:
+    description: "github owner"
+    required: true
+runs:
+  using: "docker"
+  image: "Dockerfile"
+  args:
+    - ${{ inputs.clustername }}
+    - ${{ inputs.token }}
+    - ${{ inputs.username }}
+    - ${{ inputs.projectid }}
+    - ${{ inputs.project }}
+    - ${{ inputs.saccount}}
+    - ${{ inputs.owner }}
