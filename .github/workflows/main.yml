@@ -21,6 +21,8 @@ on:
         required: true
       address:
         required: true
+      ssh_key:
+        required: true
       
 jobs:
   build:
@@ -59,7 +61,7 @@ jobs:
         with:
           playbook: stage.yml
           directory: ./.github/actions/Deployment/ansible/
-          key: ${{secrets.SSH_KEY}}
+          key: ${{secrets.ssh_key}}
           inventory: |
             [stage]
               ${{ secrets.address }} ansible_ssh_user=ansible
