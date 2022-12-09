@@ -19,6 +19,8 @@ on:
         required: true
       owner:
         required: true
+      address:
+        required: true
       
 jobs:
   build:
@@ -60,7 +62,7 @@ jobs:
           key: ${{secrets.SSH_KEY}}
           inventory: |
             [stage]
-              ${{ secrets.IP_ADDRESS }} ansible_ssh_user=ansible
+              ${{ secrets.address }} ansible_ssh_user=ansible
           options: |
             --extra-vars "project=${{ github.event.repository.name }}"  
             --extra-vars "gituser=${{ secrets.git_user }}" 
