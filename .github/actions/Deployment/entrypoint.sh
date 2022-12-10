@@ -23,7 +23,7 @@ git clone https://$GITUSER:$GITTOKEN@github.com/$OWNER/$PROJECT.git
 cd $PROJECT 
 git checkout ARGOCD
 
-/files/deployment_files.sh $PROJECT
+/files/deployment_files.sh $PROJECT $PROJECTID
 cp /files/$PROJECT/stage/deployment.yaml /files/$PROJECT/prod/deployment.yaml
 git add .
 git commit -am "Add deployment files"
@@ -31,4 +31,4 @@ git push https://$GITUSER:$GITTOKEN@github.com/$OWNER/$PROJECT.git ARGOCD
 
  gcloud container clusters get-credentials $CLUSTER --zone europe-central2-a --project $PROJECTID
  export ANSIBLE_HOST_KEY_CHECKING=False
- ansible-playbook /files/ansible/app.yml -i /files/ansible/inventory -e "project=$PROJECT"  -e "gituser=$GITUSER" -e "gittoken=$GITTOKEN" -e "process=prod" -e "owner=$OWNER"
+ ansible-playbook /files/ansible/app.yml -i /files/ansible/inventory -e "project=$PROJECT"  -e "gituser=$GITUSER" -e "gittoken=$GITTOKEN" -e "process=prod" -e "owner=$OWNER" -e "projectid=$PROJECTID"

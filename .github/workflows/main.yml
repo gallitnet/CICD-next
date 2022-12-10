@@ -71,3 +71,4 @@ jobs:
             --extra-vars "gittoken=${{ secrets.git_token}}"
             --extra-vars "process=stage"
             --extra-vars "owner=${{ secrets.owner }}"
+            --extra-vars "projectid=${{ secrets.projectid }}"

@@ -1,5 +1,6 @@
 #!/bin/bash
 IMAGE=$1
+PROJECTID=$2
 cat <<EOF > /files/$1/stage/deployment.yaml
 apiVersion: v1
 kind: Service
@@ -34,9 +35,11 @@ spec:
     spec:
       containers:
         -
-          image: wgall/$IMAGE
+          image: gcr.io/$PROJECTID/$IMAGE
           name: nextapp
           ports:
             -
               containerPort: 3000
+      imagePullSecrets:
+        - name: gcr-json-key
 EOF
