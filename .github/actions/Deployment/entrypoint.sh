@@ -19,15 +19,15 @@ echo $PATH
 git config  --global user.name "$GITUSER"
 git config  --global user.email "example@example.net"
 git config --global --add safe.directory '*'
-git clone https://$GITUSER:$GITTOKEN@github.com/$OWNER/$PROJECT.git
-cd $PROJECT 
-git checkout ARGOCD
-
+git clone https://$GITUSER:$GITTOKEN@github.com/$OWNER/argocd-deployments.git
+cd argocd-deployments
+mkdir $PROJECT 
+rsync -a template/ $PROJECT/
 /files/deployment_files.sh $PROJECT $PROJECTID
-cp /files/$PROJECT/stage/deployment.yaml /files/$PROJECT/prod/deployment.yaml
+cp /files/argocd-deployments/$PROJECT/stage/deployment.yaml /files/argocd-deployments/$PROJECT/prod/deployment.yaml
 git add .
 git commit -am "Add deployment files"
-git push https://$GITUSER:$GITTOKEN@github.com/$OWNER/$PROJECT.git ARGOCD
+git push https://$GITUSER:$GITTOKEN@github.com/$OWNER/argocd-deployments.git
 
  gcloud container clusters get-credentials $CLUSTER --zone europe-central2-a --project $PROJECTID
  export ANSIBLE_HOST_KEY_CHECKING=False

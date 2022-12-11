@@ -14,15 +14,15 @@
           argocd-image-updater.argoproj.io/app.update-strategy: latest
           argocd-image-updater.argoproj.io/write-back-method: git:secret:argocd/git-creds
           argocd-image-updater.argoproj.io/app.allow-tags: regexp:^{{ process }}-[0-9].[0-9].[0-9]
-          argocd-image-updater.argoproj.io/git-branch: ARGOCD
+          argocd-image-updater.argoproj.io/git-branch: main
           argocd-image-updater.argoproj.io/app.force-update: "true"
           argocd.argoproj.io/sync-options: Prune=true
       spec:
         project: default
         source:
-          repoURL: https://{{ gituser }}:{{ gittoken }}@github.com/{{ owner }}/{{ project }}
-          targetRevision: ARGOCD
-          path: "{{ process }}"
+          repoURL: git@github.com:gallitnet/argocd-deployments.git
+          targetRevision: HEAD
+          path: "{{ project }}/{{ process }}"
         destination:
           server: https://kubernetes.default.svc
           namespace: "{{ project }}"

@@ -1,7 +1,7 @@
 #!/bin/bash
 IMAGE=$1
 PROJECTID=$2
-cat <<EOF > /files/$1/stage/deployment.yaml
+cat <<EOF > /files/argocd-deployments/$1/stage/deployment.yaml
 apiVersion: v1
 kind: Service
 metadata:
@@ -10,9 +10,6 @@ spec:
   ports:
     - name: http
       port: 80
-      targetPort: 3000
-    - name: https
-      port: 443
       targetPort: 3000
   selector:
     app: nextapp
