@@ -25,7 +25,7 @@
               pathType: Prefix
               backend:
                 service:
-                  name: nextapp-service
+                  name: "{{ project }}-service"
                   port:
                     name: http
         tls:
