@@ -8,5 +8,5 @@
         name: "{{ project }}"
 - name: Create secrets 
   shell: kubectl get secret gcr-json-key --namespace argocd -o yaml | grep -v '^\s*namespace:\s' |kubectl apply --namespace {{ project }} -f -
-        
+  ignore_errors: true      
 
