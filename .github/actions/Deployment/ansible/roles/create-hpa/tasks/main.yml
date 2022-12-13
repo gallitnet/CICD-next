@@ -22,7 +22,7 @@
         scaleTargetRef:
           apiVersion: apps/v1
           kind: Deployment
-          name: nextapp
+          name: "{{ project }}"
       status:
         currentMetrics: null
         desiredReplicas: 0
