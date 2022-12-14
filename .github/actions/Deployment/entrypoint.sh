@@ -11,6 +11,7 @@ git config  --global user.name "$GITUSER"
 git config  --global user.email "example@example.net"
 git config --global --add safe.directory '*'
 
+cd /files
 git clone https://$GITUSER:$GITTOKEN@github.com/$OWNER/argocd-deployments.git
 cd argocd-deployments
 mkdir $PROJECT 
