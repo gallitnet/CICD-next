@@ -1,11 +1,9 @@
 #!/bin/bash 
-CLUSTER=$1
-GITTOKEN=$2
-GITUSER=$3
-PROJECTID=$4
-PROJECT=$5
-SACREDS=$6
-OWNER=$7
+GITTOKEN=$1
+GITUSER=$2
+PROJECTID=$3
+PROJECT=$4
+OWNER=$5
 
 
 ansible-galaxy collection install google.cloud
@@ -29,7 +27,3 @@ cp /files/argocd-deployments/$PROJECT/stage/deployment.yaml /files/argocd-deploy
 git add .
 git commit -am "Add deployment files"
 git push https://$GITUSER:$GITTOKEN@github.com/$OWNER/argocd-deployments.git
-
- gcloud container clusters get-credentials $CLUSTER --zone europe-central2-a --project $PROJECTID
- export ANSIBLE_HOST_KEY_CHECKING=False
- ansible-playbook /files/ansible/app.yml -i /files/ansible/inventory -e "project=$PROJECT"  -e "gituser=$GITUSER" -e "gittoken=$GITTOKEN" -e "process=prod" -e "owner=$OWNER" -e "projectid=$PROJECTID"
