@@ -43,7 +43,7 @@ jobs:
           export_default_credentials: true 
       - name: Setup docker 
         run: gcloud auth configure-docker --quiet
-      - name: Deploy on Production
+      - name: Create directory with deployments
         uses: ./.github/actions/Deployment
         id: app
         with:

@@ -6,13 +6,6 @@ PROJECT=$4
 OWNER=$5
 
 
-ansible-galaxy collection install google.cloud
-ansible-galaxy collection install kubernetes.core
-cd /files 
-
-echo $SACREDS > /files/creds/.cred.json
-gcloud auth login --cred-file=/files/creds/.cred.json
-echo $PATH
 #!/bin/bash
 git config  --global user.name "$GITUSER"
 git config  --global user.email "example@example.net"
