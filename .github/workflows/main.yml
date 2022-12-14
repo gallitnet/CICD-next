@@ -7,15 +7,11 @@ on:
         required: true
         type: string
     secrets:
-      cluster_name:
-        required: true
       git_token:
         required: true
       projectid:
         required: true
       git_user:
-        required: true
-      sacreds:
         required: true
       owner:
         required: true
@@ -49,12 +45,10 @@ jobs:
         uses: ./.github/actions/Deployment
         id: app
         with:
-          clustername: ${{ secrets.cluster_name }}
           token: ${{ secrets.git_token}}
           username: ${{ secrets.git_user }}
           projectid: ${{ secrets.projectid}}
           project: ${{ inputs.project }}
-          saccount: ${{ secrets.sacreds }}
           owner: ${{ secrets.owner }}
       - name: Deploy on stage
         uses: dawidd6/action-ansible-playbook@v2
