@@ -19,6 +19,8 @@ on:
         required: true
       ssh_key:
         required: true
+      sacreds:
+        required: true
       
 jobs:
   build:
